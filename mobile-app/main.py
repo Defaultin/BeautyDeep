@@ -506,7 +506,7 @@ class BeautyDeepApp(MDApp):
 			sleep(1)
 			im = Image(self.main_interface.beauty_screen.image_path)
 			self.main_interface.beauty_screen.input_image = im.image.copy()
-			im.send_request(IPv4='http://192.168.0.102:5000')
+			im.send_request()
 			im.create_output(mask=False)
 			im.create_output(mask=True)
 			self.main_interface.beauty_screen.set_image('mask-output.jpg')
@@ -514,7 +514,7 @@ class BeautyDeepApp(MDApp):
 			self.main_interface.beauty_screen.faces = im.faces
 			self.main_interface.beauty_screen.create_face_menu()
 			self.main_interface.current = 'beauty_screen'
-		except cv2.error:
+		except ValueError:
 			toast(languages[self.language]['small_resolution'])
 			self.set_current_screen('menu_screen')
 		except requests.exceptions.ConnectionError as e:

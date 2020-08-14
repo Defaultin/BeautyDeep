@@ -1,6 +1,7 @@
 import os
 import dlib
 from keras.backend import tf as ktf
+from keras.utils import get_file
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.applications.resnet50 import ResNet50
@@ -12,6 +13,16 @@ APP_ROOT = os.path.abspath('')
 
 
 def BeautyDeepNet():
+	prefix = 'https://getfile.dokpub.com/yandex/get/'
+	link = 'https://yadi.sk/d/K635wz5RO3b15g'
+	get_file(
+		'cnn-config.zip', 
+		prefix + link, 
+		extract=True, 
+		archive_format='zip', 
+		cache_subdir=APP_ROOT
+	)
+
 	detector_path = APP_ROOT + '/cnn-config/mmod_human_face_detector.dat'
 	predictor_path = APP_ROOT + '/cnn-config/shape_predictor_68_face_landmarks.dat'
 	detector = dlib.cnn_face_detection_model_v1(detector_path)

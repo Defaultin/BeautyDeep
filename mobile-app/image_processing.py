@@ -1,6 +1,7 @@
 import os
 import cv2
 import json
+import socket
 import requests
 from face_params import Face
 
@@ -8,7 +9,21 @@ from face_params import Face
 __all__ = ('Image')
 
 
+def get_IPv4():
+	'''Returns private IP of the host'''
+	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+	try:
+		s.connect(('8.8.8.8', 80))
+		IPv4 = s.getsockname()[0]
+	except Exception:
+		IPv4 = '127.0.0.1'
+	finally:
+		s.close()
+	return IPv4
+	
+
 class Image:
+	'''Image with marked faces and landmarks'''
 	def __init__(self, path):
 		self.path = path
 		self.name = os.path.basename(path)
@@ -18,6 +33,7 @@ class Image:
 		self.image = self.load_image()
 
 	def load_image(self):
+		'''Resizes given image for CNN inputs'''
 		im = cv2.imread(self.path)
 		if im.shape[0] > 1280:
 			new_shape = (1280, im.shape[1] * 1280 / im.shape[0])
@@ -31,6 +47,7 @@ class Image:
 		return cv2.resize(im, (int(new_shape[1]), int(new_shape[0])))
 
 	def create_output(self, *, mask=False):
+		'''Highlights faces and landmarks on the image'''
 		im = self.image
 		for idx, obj in enumerate(self.faces):
 			if mask:
@@ -44,8 +61,9 @@ class Image:
 		else:
 			cv2.imwrite('output.jpg', im)
 
-	def send_request(self, *, IPv4='http://192.168.0.102:5000'):
-		url = IPv4 + '/face_detection'
+	def send_request(self, *, IP=get_IPv4(), port=5000):
+		'''Sends an image to a remote server for neural network processing'''
+		url = f'http://{IP}:{port}/face_detection'
 		headers = {'content-type': 'image/jpeg'}
 		_, encoded_image = cv2.imencode('.jpg', self.image)
 		response = requests.post(url, data=encoded_image.tostring(), headers=headers)

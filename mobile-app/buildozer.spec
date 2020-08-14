@@ -22,7 +22,7 @@ source.include_patterns = images/*
 version = 2.9.0
 
 # (list) Application requirements
-requirements = python3==3.7.6,hostpython3==3.7.6,kivy==1.11.1,plyer,https://github.com/kivymd/KivyMD/archive/master.zip,akivymd,sdl2_ttf==2.0.15,numpy,requests,urllib3,chardet,certifi,idna,simplejson,openssl,opencv
+requirements = python3==3.7.6,hostpython3==3.7.6,kivy==1.11.1,plyer,https://github.com/kivymd/KivyMD/archive/master.zip,akivymd,sdl2_ttf==2.0.15,numpy,socket,requests,urllib3,chardet,certifi,idna,simplejson,openssl,opencv
 
 # (str) Presplash of the application
 presplash.filename = %(source.dir)s/images/logo-bg.png

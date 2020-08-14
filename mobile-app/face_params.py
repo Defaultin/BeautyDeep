@@ -9,9 +9,9 @@ class Face:
 		self.shape = shape
 		self.beauty = beauty
 
-	def score_mapping(self, x): 
-		'''Normal distribution multiplied by 100 with mu = 1 and sigma = 0.3'''
-		return 100 * (np.e ** (-5 * (x - 1) ** 2))
+	def _difference(self, a, b): 
+		'''Percentage difference between two independent quantities'''
+		return 100 * min(a, b) / max(a, b)
 
 	def _get_line(self, p1, p2):
 		'''Line coeff ax+by+c=0 (by 2 points)'''
@@ -186,9 +186,9 @@ class Face:
 		eyebrows_distance = self._length(self.shape[21], self.shape[22])
 
 		phi = (1 + 5 ** 0.5) / 2
-		golden_ratio1 = self.score_mapping((face_length / face_length) / phi)
-		golden_ratio2 = self.score_mapping((mouth_width / nose_width) / phi)
-		golden_ratio3 = self.score_mapping((pupils_distance / eyebrows_distance) / phi)
+		golden_ratio1 = self._difference(face_length / face_length, phi)
+		golden_ratio2 = self._difference(mouth_width / nose_width, phi)
+		golden_ratio3 = self._difference(pupils_distance / eyebrows_distance, phi)
 		result = (golden_ratio1 + golden_ratio2 + golden_ratio3) / 3
 		return f'{param_lang[language]} {round(result, 2)}%'
 
@@ -205,9 +205,9 @@ class Face:
 		eyebrows_to_nose = self._distance(self.shape[33], self.shape[21], self.shape[22],)
 		chin_to_nose = self._length(self.shape[8], self.shape[33])
 
-		ratio1 = self.score_mapping(eyes_distance / nose_width)
-		ratio2 = self.score_mapping(eyebrows_distance / nose_width)
-		ratio3 = self.score_mapping(eyebrows_to_nose / chin_to_nose)
+		ratio1 = self._difference(eyes_distance, nose_width)
+		ratio2 = self._difference(eyebrows_distance, nose_width)
+		ratio3 = self._difference(eyebrows_to_nose, chin_to_nose)
 		result = (ratio1 + ratio2 + ratio3) / 3
 		return f'{param_lang[language]} {round(result, 2)}%'
 
@@ -216,7 +216,7 @@ class Face:
 		param_lang = ['Поворот лица:', 'Face rotation:', 'Gesichtswende:']
 		left_distance = self._length(self.shape[0], self.shape[27])
 		right_distance = self._length(self.shape[16], self.shape[27])
-		return f'{param_lang[language]} {round(100 - self.score_mapping(left_distance / right_distance), 2)}%'
+		return f'{param_lang[language]} {round(100 - self._difference(left_distance, right_distance), 2)}%'
 
 	def get_character_param(self, language):
 		'''Relations (45 characters): eyes + eyebrows + lips -> character1; nose + chin + face -> character2'''

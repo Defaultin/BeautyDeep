@@ -46,9 +46,8 @@ def detection():
 
 
 if __name__ == '__main__':
-	app.run(host='0.0.0.0', port=5000, threaded=True)
-	# while True:
-	# 	try:
-	# 		app.run(host='0.0.0.0', port=5000, threaded=True)
-	# 	except Exception as e:
-	# 		logging.error(e)
+	while True:
+		try:
+			app.run(host='0.0.0.0', port=5000, threaded=True)
+		except Exception as e:
+			logging.error(e)
