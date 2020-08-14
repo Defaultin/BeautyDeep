@@ -23,8 +23,8 @@ def BeautyDeepNet():
 		cache_subdir=APP_ROOT
 	)
 
-	detector_path = APP_ROOT + '/cnn-config/mmod_human_face_detector.dat'
-	predictor_path = APP_ROOT + '/cnn-config/shape_predictor_68_face_landmarks.dat'
+	detector_path = os.path.join(APP_ROOT, 'cnn-config', 'mmod_human_face_detector.dat')
+	predictor_path = os.path.join(APP_ROOT, 'cnn-config', 'shape_predictor_68_face_landmarks.dat')
 	detector = dlib.cnn_face_detection_model_v1(detector_path)
 	predictor = dlib.shape_predictor(predictor_path)
 
