@@ -25,6 +25,7 @@ from plyer import storagepath, filechooser
 
 import os
 import cv2
+import socket
 import webbrowser
 import requests
 import numpy as np
@@ -362,6 +363,7 @@ class BeautyDeepApp(MDApp):
 		self.language = self.store['user_config']['app_language']
 		self.APP_ROOT = os.path.abspath('')
 		self.DCIM = self.get_dcim_path()
+		self.server_url = self.get_server_url()
 
 	def build(self):
 		'''Prepares the application configurations and adds all content to the screens'''
@@ -506,7 +508,7 @@ class BeautyDeepApp(MDApp):
 			sleep(1)
 			im = Image(self.main_interface.beauty_screen.image_path)
 			self.main_interface.beauty_screen.input_image = im.image.copy()
-			im.send_request()
+			im.send_request(server=self.server_url)
 			im.create_output(mask=False)
 			im.create_output(mask=True)
 			self.main_interface.beauty_screen.set_image('mask-output.jpg')
@@ -517,13 +519,34 @@ class BeautyDeepApp(MDApp):
 		except ValueError:
 			toast(languages[self.language]['small_resolution'])
 			self.set_current_screen('menu_screen')
-		except requests.exceptions.ConnectionError as e:
+		except requests.exceptions.ConnectionError:
 			toast(languages[self.language]['server_off'])
 			self.set_current_screen('menu_screen')
 		except Exception as e:
 			print(e)
 			toast(languages[self.language]['not_recognized'])
 			self.set_current_screen('menu_screen')
+
+	def get_server_url(self, *, port=5000):
+		'''Returns server url by private ip of the host'''
+		s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+		try:
+			s.connect(('8.8.8.8', 80))
+			IPv4 = s.getsockname()[0]
+		except Exception:
+			IPv4 = '192.168.0.100'
+		finally:
+			s.close()
+
+		network_prefix = '.'.join(IPv4.split('.')[:-1])
+		for host in range(300):
+			try:
+				url = f'http://{network_prefix}.{host}:{port}'
+				if requests.get(url, timeout=.05).status_code == 200:
+					return url
+			except Exception:
+				pass
+		raise requests.exceptions.ConnectionError('Server url not found!')
 
 
 
