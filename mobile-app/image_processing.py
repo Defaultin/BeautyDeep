@@ -1,6 +1,7 @@
 import os
 import cv2
 import json
+import socket
 import requests
 from face_params import Face
 
@@ -47,9 +48,30 @@ class Image:
 		else:
 			cv2.imwrite('output.jpg', im)
 
-	def send_request(self, *, server='http://192.168.0.102:5000'):
+	def get_server_url(self, *, port=5000):
+		'''Returns server url by private ip of the host'''
+		s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+		try:
+			s.connect(('8.8.8.8', 80))
+			IPv4 = s.getsockname()[0]
+		except Exception:
+			IPv4 = '192.168.0.100'
+		finally:
+			s.close()
+
+		network_prefix = '.'.join(IPv4.split('.')[:-1])
+		for host in range(2 ** 7):
+			try:
+				url = f'http://{network_prefix}.{host}:{port}'
+				if requests.get(url, timeout=.05).status_code == 200:
+					return url
+			except Exception:
+				pass
+		return f'http://{IPv4}:{port}'
+
+	def send_request(self):
 		'''Sends an image to a remote server for neural network processing'''
-		url = server + '/face_detection'
+		url = self.get_server_url() + '/face_detection' 
 		headers = {'content-type': 'image/jpeg'}
 		_, encoded_image = cv2.imencode('.jpg', self.image)
 		response = requests.post(url, data=encoded_image.tostring(), headers=headers)
