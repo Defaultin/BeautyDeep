@@ -92,7 +92,7 @@ class HomeScreen(MDBottomNavigationItem):
 				MDLabel(
 					text=txs, 
 					size_hint=(1, None),
-					height=Window.width / 2.5,
+					height=dp(Window.height / 5),
 					theme_text_color='Secondary'
 				)
 			)
