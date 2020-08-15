@@ -38,4 +38,4 @@ The program uses a neural network trained to evaluate the beauty percentage on t
 1. Connect your phone and computer devices to the same network
 2. Open "BeautyDeep/web-server" and start the [server.py](https://github.com/Defaultin/BeautyDeep/blob/master/web-server/server.py)
 3. Wait until the neural network configurations are loaded
-4. Install the mobile [application](https://yadi.sk/d/W8GR6PjsKdW5rw) or open "BeautyDeep/mobile-app" on your computer and run [main.py](https://github.com/Defaultin/BeautyDeep/blob/master/mobile-app/main.py)
+4. Install the mobile [application](https://getfile.dokpub.com/yandex/get/https://yadi.sk/d/ngi6-QVV9xtRSQ) or open "BeautyDeep/mobile-app" on your computer and run [main.py](https://github.com/Defaultin/BeautyDeep/blob/master/mobile-app/main.py)

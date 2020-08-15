@@ -48,7 +48,7 @@ class Image:
 		else:
 			cv2.imwrite('output.jpg', im)
 
-	def get_server_url(self, *, port=5000, max_connected_users=32):
+	def get_server_url(self, *, port=5000, max_connected_users=20):
 		'''Returns server url by private ip of the host'''
 		s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		try:
