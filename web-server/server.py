@@ -39,7 +39,12 @@ def detection():
 				probability_vec = model.predict(normed_image)[0]
 
 			beauty_score = np.dot(probability_vec, range(1, 6)) * 40 - 70
-			detected = face, full_shape, beauty_score
+			if 0 <= beauty_score <= 100:
+				detected = face, full_shape, beauty_score
+			elif beauty_score > 100:
+				detected = face, full_shape, 100.0
+			else:
+				detected = face, full_shape, 0.0
 			faces.append(detected)
 
 	return Response(response=json.dumps({'faces': faces}), status=200, mimetype='application/json')
