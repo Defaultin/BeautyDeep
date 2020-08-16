@@ -96,7 +96,7 @@
 									size_hint: None, None
 									size: dp(48), dp(48)
 									active: True if app.theme_cls.theme_style == 'Light' else False
-									on_active: if self.active: app.switch_theme_style()
+									on_active: if self.active and app.theme_cls.theme_style == 'Dark': app.switch_theme_style()
 
 								Label:
 									id: light_label
@@ -107,7 +107,7 @@
 									size_hint: None, None
 									size: dp(48), dp(48)
 									active: True if app.theme_cls.theme_style == 'Dark' else False
-									on_active: if self.active: app.switch_theme_style()
+									on_active: if self.active and app.theme_cls.theme_style == 'Light': app.switch_theme_style()
 
 								Label:
 									id: dark_label
