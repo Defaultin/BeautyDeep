@@ -209,7 +209,8 @@ class BeautyScreen(Screen):
 	def add_content(self):
 		'''Adds main content to the BeautyScreen, called in builder'''
 		self.piechart = AKPieChart(
-			items=[{'Face №1': 10, 'Other faces': 90}],
+			items=[{'0-100% \n~': 100}],
+			order=False,
 			pos_hint={'center_x': .5, 'center_y': .5}, 
 			size_hint=[None, None],
 			size=(dp(300), dp(300))

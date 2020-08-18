@@ -305,24 +305,41 @@ class Face:
 			75: 'charmant', 80: 'schön', 85: 'entzückend', 90: 'prächtig', 95: 'blendend', 100: 'ideal'
 		}
 
-		percentage = lambda x: 14.255 * np.e ** -(((x - 56) ** 2) / 392) # mu = 56, sigma = 14
+		percentage = lambda x: 14.25412 * np.e ** -(((x - 56) ** 2) / 392) # mu = 56, sigma = 14
 		score = round(percentage(self.beauty), 2)
 		key = round(0.2 * self.beauty) * 5
 
 		if language == 0:
-			return f'Лицо №{face_idx+1} - {rus_mapping[key]}! \nВ мире всего {score}% таких лиц (± 0.5% красоты):'
+			return f'Лицо №{face_idx+1} - {rus_mapping[key]}! \nВ мире всего {score}% таких лиц (± 2.5% красоты):'
 		elif language == 1:
-			return f'Face №{face_idx+1} is {eng_mapping[key]}! \nThere are only {score}% faces like that in the world (± 0.5% beauty score):'
+			return f'Face №{face_idx+1} is {eng_mapping[key]}! \nThere are only {score}% faces like that in the world (± 2.5% beauty score):'
 		elif language == 2:
-			return f'Gesicht №{face_idx+1} ist {deu_mapping[key]}! \nEs gibt nur {score}% solcher Gesichter in der Welt (± 0.5% Schönheitsgrad):'
+			return f'Gesicht №{face_idx+1} ist {deu_mapping[key]}! \nEs gibt nur {score}% solcher Gesichter in der Welt (± 2.5% Schönheitsgrad):'
 
 	def get_piechart_items(self, language, face_idx):
 		'''Data for the piechart of the ratio of world beauty'''
-		percentage = lambda x: 14.255 * np.e ** -(((x - 56) ** 2) / 392) # mu = 56, sigma = 14
-		score = int(round(percentage(self.beauty)))
+		keys = ['0-30 \n~', '30-40 \n~', '40-50 \n~', '50-60 \n~', '60-70 \n~', '70-80 \n~', '80-100 \n~']
+		values = [3, 9, 21, 28, 23, 12, 4]
+		key_pos = 0
+
+		if 30 < self.beauty <= 40:
+			key_pos = 1
+		elif 40 < self.beauty <= 50:
+			key_pos = 2
+		elif 50 < self.beauty <= 60:
+			key_pos = 3
+		elif 60 < self.beauty <= 70:
+			key_pos = 4
+		elif 70 < self.beauty <= 80:
+			key_pos = 5
+		elif 80 < self.beauty <= 100:
+			key_pos = 6
+
 		if language == 0:
-			return [{f'Лицо №{face_idx + 1}': score, 'Другие': 100 - score}]
+			keys[key_pos] = f'Лицо №{face_idx + 1} \n~'
 		elif language == 1:
-			return [{f'Face №{face_idx + 1}': score, 'Others': 100 - score}]
+			keys[key_pos] = f'Face №{face_idx + 1} \n~'
 		elif language == 2:
-			return [{f'Gesicht №{face_idx + 1}': score, 'Übrigen': 100 - score}]
+			keys[key_pos] = f'Gesicht №{face_idx + 1} \n~'
+
+		return [{k: v for k, v in zip(keys, values)}]
