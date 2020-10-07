@@ -9,10 +9,10 @@ The program uses a neural network trained to evaluate the beauty percentage on t
 # Server dependencies
 
 * Python 3.x
-* Tensorflow
-* Keras
+* Tensorflow 1.14.0
+* Keras 2.2.4
+* Opencv 4.1.1
 * Numpy
-* Opencv
 * Dlib
 * Json
 * Flask
