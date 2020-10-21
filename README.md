@@ -12,26 +12,26 @@ The program uses a neural network trained to evaluate the beauty percentage on t
 * Tensorflow 1.14.0
 * Keras 2.2.4
 * Opencv 4.1.1
-* Numpy
-* Dlib
-* Json
-* Flask
-* Logging
+* Numpy 1.x
+* Dlib 19.20.0
+* Json 1.x
+* Flask 1.0.2
+* Logging 1.x
 
 # App dependencies
 
 * Python 3.x
 * hostpython 3.x
-* Kivy
-* Plyer
-* Kivymd
-* Akivymd
-* Numpy
-* Socket
-* Requests
-* Json
-* Openssl
-* Opencv
+* Kivy 1.11.1
+* Plyer 1.4.3
+* Kivymd [git](https://github.com/HeaTTheatR/KivyMD.git@589002ff31b139f0b440a2c06612025eb43e6e70)
+* Akivymd 1.x
+* Numpy 1.x
+* Socket 1.x
+* Requests 2.24.0
+* Json 1.x
+* Openssl 19.x
+* Opencv 4.1.1.x
 
 # How to use
 
