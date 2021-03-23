@@ -1,5 +1,5 @@
 opencv_python==4.1.1.26
-kivymd @ git+https://github.com/HeaTTheatR/KivyMD.git@589002ff31b139f0b440a2c06612025eb43e6e70
+kivymd @ git+https://github.com/kivymd/KivyMD/archive/589002ff31b139f0b440a2c06612025eb43e6e70.zip
 requests==2.24.0
 akivymd==1.0
 plyer==1.4.3
