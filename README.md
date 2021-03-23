@@ -30,7 +30,7 @@ $ pip install -r BeautyDeep/web-server/requirements.txt
 2. Connect your phone and computer devices to the same network
 3. Open "BeautyDeep/web-server" and start the [server.py](https://github.com/Defaultin/BeautyDeep/blob/master/web-server/server.py)
 4. Wait until the neural network configurations are loaded
-5. Install the mobile [application](https://drive.google.com/uc?export=download&id=1W6_wr7gvIHK6yud1tDzUHIYLGwO01PiA) or open "BeautyDeep/mobile-app" on your computer and run [main.py](https://github.com/Defaultin/BeautyDeep/blob/master/mobile-app/main.py)
+5. Install the mobile [application](https://drive.google.com/uc?export=download&id=1FpxAb0mg5gEAKXC7Pxw6q5OkXrXsylHQ) or open "BeautyDeep/mobile-app" on your computer and run [main.py](https://github.com/Defaultin/BeautyDeep/blob/master/mobile-app/main.py)
 6. In the server settings of the application, specify the public ip address (http://192.168.0.102:5000) of your local machine
 
 ## For remote server
