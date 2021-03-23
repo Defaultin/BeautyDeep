@@ -26,9 +26,9 @@ from plyer import storagepath, filechooser
 import os
 import cv2
 import webbrowser
-import requests
 import numpy as np
 from threading import Thread
+from requests.exceptions import ConnectionError
 from app_languages import languages
 from image_processing import Image
 
@@ -138,12 +138,11 @@ class SettingsScreen(MDBottomNavigationItem):
 	def set_language(self, menu_instance, item_instance):
 		'''Sets the selected interface language'''
 		if item_instance.text == 'Русский':
-			self.app.language = 0
+			self.app.change_language(0)
 		elif item_instance.text == 'English':
-			self.app.language = 1
+			self.app.change_language(1)
 		elif item_instance.text == 'Deutsch':
-			self.app.language = 2
-		self.app.change_language()
+			self.app.change_language(2)
 		self.lang_chooser.set_item(item_instance.text)
 		menu_instance.dismiss()
 
@@ -357,9 +356,11 @@ class BeautyDeepApp(MDApp):
 			self.store['user_config'] = {
 				'theme_style': 'Light', 
 				'theme_color': 'Pink', 
-				'app_language': 1
+				'app_language': 1,
+				'public_ip': 'http://192.168.0.102:5000'
 			}
 		self.language = self.store['user_config']['app_language']
+		self.server_ip = self.store['user_config']['public_ip']
 		self.APP_ROOT = os.path.abspath('')
 		self.DCIM = self.get_dcim_path()
 
@@ -370,7 +371,7 @@ class BeautyDeepApp(MDApp):
 		self.theme_cls.primary_palette = self.store['user_config']['theme_color']
 		self.main_interface = MainInterface()
 		self.main_interface.set_toolbar_color(self.theme_cls.primary_color)
-		self.change_language()
+		self.change_language(self.language)
 		self.main_interface.beauty_screen.add_content()
 		self.main_interface.settings_screen.create_language_menu()
 		return self.main_interface
@@ -415,9 +416,10 @@ class BeautyDeepApp(MDApp):
 			self.theme_cls.theme_style = 'Light'
 			self.store.put(
 				'user_config', 
-				theme_style='Light', 
+				theme_style='Light',
 				theme_color=self.theme_cls.primary_palette,
-				app_language=self.language
+				app_language=self.language,
+				public_ip=self.server_ip
 			)
 		else: 
 			self.theme_cls.theme_style = 'Dark'
@@ -425,7 +427,8 @@ class BeautyDeepApp(MDApp):
 				'user_config', 
 				theme_style='Dark', 
 				theme_color=self.theme_cls.primary_palette,
-				app_language=self.language
+				app_language=self.language,
+				public_ip=self.server_ip
 			)
 
 	def switch_theme_color(self, color_name):
@@ -435,16 +438,19 @@ class BeautyDeepApp(MDApp):
 			'user_config', 
 			theme_style=self.theme_cls.theme_style, 
 			theme_color=color_name, 
-			app_language=self.language
+			app_language=self.language,
+			public_ip=self.server_ip
 		)
 
-	def change_language(self):
+	def change_language(self, language):
 		'''Changes the interface language of the entire app'''
+		self.language = language
 		self.store.put(
 			'user_config', 
 			theme_style=self.theme_cls.theme_style,
 			theme_color=self.theme_cls.primary_palette,
-			app_language=self.language
+			app_language=language,
+			public_ip=self.server_ip
 		)
 		self.main_interface.home_screen.add_content(self.language)
 		self.main_interface.settings_screen.light_label.text = languages[self.language]['light']
@@ -453,6 +459,7 @@ class BeautyDeepApp(MDApp):
 		self.main_interface.settings_screen.color_label.text = languages[self.language]['theme_color']
 		self.main_interface.settings_screen.language_label.text = languages[self.language]['choose_language']
 		self.main_interface.settings_screen.lang_chooser.text = languages[self.language]['lang']
+		self.main_interface.settings_screen.server_label.text = languages[self.language]['server']
 		self.main_interface.settings_screen.about_label.text = languages[self.language]['about_us']
 		self.main_interface.settings_screen.developer_label.text = languages[self.language]['developer']
 		self.main_interface.settings_screen.feedback_label.text = languages[self.language]['feedback']
@@ -463,6 +470,17 @@ class BeautyDeepApp(MDApp):
 		self.main_interface.spinner_screen.processing_label2.text = languages[self.language]['image_processing2']
 		self.main_interface.beauty_screen.save_button.text = languages[self.language]['save_results']
 		self.main_interface.beauty_screen.mask_button.text = languages[self.language]['hide_mask']
+
+	def change_server_ip(self, ip):
+		'''Changes server public ip (http://ip:port)'''
+		self.server_ip = ip
+		self.store.put(
+			'user_config', 
+			theme_style=self.theme_cls.theme_style,
+			theme_color=self.theme_cls.primary_palette,
+			app_language=self.language,
+			public_ip=ip
+		)
 
 	def file_manager_open(self):
 		'''Call plyer filechooser API to run a filechooser activity in given directory'''
@@ -505,7 +523,7 @@ class BeautyDeepApp(MDApp):
 		try:
 			im = Image(self.main_interface.beauty_screen.image_path)
 			self.main_interface.beauty_screen.input_image = im.image.copy()
-			im.send_request()
+			im.send_request(self.server_ip)
 			im.create_output(mask=False)
 			im.create_output(mask=True)
 			self.main_interface.beauty_screen.set_image('mask-output.jpg')
@@ -516,7 +534,7 @@ class BeautyDeepApp(MDApp):
 		except ValueError:
 			toast(languages[self.language]['small_resolution'])
 			self.set_current_screen('menu_screen')
-		except requests.exceptions.ConnectionError:
+		except ConnectionError:
 			toast(languages[self.language]['server_off'])
 			self.set_current_screen('menu_screen')
 		except Exception as e:

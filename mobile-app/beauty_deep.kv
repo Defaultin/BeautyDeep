@@ -66,6 +66,7 @@
 					style_label: style_label
 					color_label: color_label
 					language_label: language_label
+					server_label: server_label
 					about_label: about_label
 					developer_label: developer_label
 					feedback_label: feedback_label
@@ -235,6 +236,24 @@
 								id: lang_chooser
 								pos_hint: {'center_x': .5, 'center_y': .5}
 								on_release: root.settings_screen.language_menu.open()
+
+							MDSeparator:
+
+							MDLabel:
+								id: server_label
+								bold: True
+								theme_text_color: 'Primary'
+								size_hint_y: None
+								height: self.texture_size[1]
+
+							MDTextField:
+								id: server_field
+								text: app.server_ip
+								helper_text: 'http://public_ip:port or http://domain.com'
+								helper_text_mode: 'on_focus'
+								color_mode: 'custom'
+								line_color_focus: app.theme_cls.text_color
+								on_text_validate: app.change_server_ip(server_field.text)
 
 							MDSeparator:
 

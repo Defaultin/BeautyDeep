@@ -6,36 +6,35 @@ The program uses a neural network trained to evaluate the beauty percentage on t
 
 ![alt text](https://github.com/Defaultin/BeautyDeep/blob/master/mobile-app/images/logo-bg.png "BeautyDeep")
 
-# Server dependencies
+# Repository structure
 
-* Python 3.x
-* Tensorflow 1.14.0
-* Keras 2.2.4
-* Opencv 4.1.1
-* Numpy 1.x
-* Dlib 19.20.0
-* Json 1.x
-* Flask 1.0.2
-* Logging 1.x
+* mobile-app -- source code of an android mobile application
+* neural-network -- source code for training and testing the neural network
+* web-server -- source code of a flask web application
+* papers -- pdf documents with project documentation
+* app-preview.mov -- video-preview of a mobile application powered by android 8
 
-# App dependencies
+# Dependencies
 
-* Python 3.x
-* hostpython 3.x
-* Kivy 1.11.1
-* Plyer 1.4.3
-* Kivymd [git](https://github.com/HeaTTheatR/KivyMD.git@589002ff31b139f0b440a2c06612025eb43e6e70)
-* Akivymd 1.x
-* Numpy 1.x
-* Socket 1.x
-* Requests 2.24.0
-* Json 1.x
-* Openssl 19.x
-* Opencv 4.1.1.x
+```bash
+$ pip install -r BeautyDeep/mobile-app/requirements.txt
+$ pip install -r BeautyDeep/neural-network/requirements.txt
+$ pip install -r BeautyDeep/web-server/requirements.txt
+```
 
 # How to use
 
-1. Connect your phone and computer devices to the same network
-2. Open "BeautyDeep/web-server" and start the [server.py](https://github.com/Defaultin/BeautyDeep/blob/master/web-server/server.py)
-3. Wait until the neural network configurations are loaded
-4. Install the mobile [application](https://drive.google.com/uc?export=download&id=1W6_wr7gvIHK6yud1tDzUHIYLGwO01PiA) or open "BeautyDeep/mobile-app" on your computer and run [main.py](https://github.com/Defaultin/BeautyDeep/blob/master/mobile-app/main.py)
+## For local server
+
+1. Install all dependencies for application and server
+2. Connect your phone and computer devices to the same network
+3. Open "BeautyDeep/web-server" and start the [server.py](https://github.com/Defaultin/BeautyDeep/blob/master/web-server/server.py)
+4. Wait until the neural network configurations are loaded
+5. Install the mobile [application](https://drive.google.com/uc?export=download&id=1W6_wr7gvIHK6yud1tDzUHIYLGwO01PiA) or open "BeautyDeep/mobile-app" on your computer and run [main.py](https://github.com/Defaultin/BeautyDeep/blob/master/mobile-app/main.py)
+6. In the server settings of the application, specify the public ip address (http://192.168.0.102:5000) of your local machine
+
+## For remote server
+
+1. Deploy the web application to the remote server using [setup.sh](https://github.com/Defaultin/BeautyDeep/blob/master/web-server/setup.sh) on your PowerShell
+2. Install the mobile [application](https://drive.google.com/uc?export=download&id=1W6_wr7gvIHK6yud1tDzUHIYLGwO01PiA) or open "BeautyDeep/mobile-app" on your computer and run [main.py](https://github.com/Defaultin/BeautyDeep/blob/master/mobile-app/main.py)
+3. In the server settings of the application, specify the domain (http://domain.com) or public ip address (http://192.168.0.102:5000) of your remote server
