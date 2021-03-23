@@ -22,7 +22,7 @@ source.include_patterns = images/*
 version = 3.0.0
 
 # (list) Application requirements
-requirements = python3==3.7.6,hostpython3==3.7.6,kivy==1.11.1,plyer,https://github.com/kivymd/KivyMD/archive/589002ff31b139f0b440a2c06612025eb43e6e70.zip,akivymd,sdl2_ttf==2.0.15,numpy,requests,urllib3,chardet,certifi,idna,simplejson,openssl,opencv
+requirements = python3==3.7.6,hostpython3==3.7.6,kivy==1.11.1,plyer,https://github.com/kivymd/KivyMD/archive/589002ff31b139f0b440a2c06612025eb43e6e70.zip,akivymd,sdl2_ttf==2.0.15,numpy,requests,urllib3,chardet,certifi,idna,simplejson,opencv
 
 # (str) Presplash of the application
 presplash.filename = %(source.dir)s/images/logo-bg.png
@@ -48,7 +48,7 @@ android.presplash_color = #E91E63
 # (list) Permissions
 android.permissions = INTERNET,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
 
-# (str) Android SDK directory (if empty, it will be automatically downloaded.)
+# (str) Android SDK directory %(source.dir)(if empty, it will be automatically downloaded.)
 android.sdk_path = ../android-sdk/
 
 # (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
