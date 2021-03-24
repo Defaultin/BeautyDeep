@@ -37,4 +37,4 @@ $ pip install -r BeautyDeep/web-server/requirements.txt
 
 1. Deploy the web application to the remote server using [setup.sh](https://github.com/Defaultin/BeautyDeep/blob/master/web-server/setup.sh) on your PowerShell
 2. Install the mobile [application](https://drive.google.com/uc?export=download&id=1FpxAb0mg5gEAKXC7Pxw6q5OkXrXsylHQ) or open "BeautyDeep/mobile-app" on your computer and run [main.py](https://github.com/Defaultin/BeautyDeep/blob/master/mobile-app/main.py)
-3. In the server settings of the application, specify the domain (e.g. http://domain.com) or public ip address (e.g. http://192.168.0.102:5000) of your remote server
+3. In the server settings of the application, specify the domain (e.g. http://domain.com) or public ip address (e.g. http://34.91.143.244:5000) of your remote server
