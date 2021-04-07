@@ -5,9 +5,7 @@ BeautyDeep is an app which evaluates the beauty of a human face from a photo giv
 The program uses a neural network trained to evaluate the beauty percentage on the basis of more than 10 thousand [photos](https://github.com/HCIILAB/SCUT-FBP5500-Database-Release) already rated by real people, and also detectors recognising the features of the face. Using mathematical formulas the face features are typified, each of the types describing the person’s character according to neurotypology laws.
 
 ![](https://github.com/Defaultin/BeautyDeep/blob/master/mobile-app/images/logo-bg.png "BeautyDeep")
-<video width="320" height="240" controls>
-  <source src="https://github.com/Defaultin/BeautyDeep/blob/master/papers/app-preview.mov" type="video/mp4/mov">
-</video>
+<img src="https://github.com/Defaultin/BeautyDeep/blob/master/papers/app-preview.gif" width="40" height="40" />
 
 # Repository structure
 
