@@ -6,7 +6,7 @@ The program uses a neural network trained to evaluate the beauty percentage on t
 
 ![](https://github.com/Defaultin/BeautyDeep/blob/master/mobile-app/images/logo-bg.png "BeautyDeep")
 <video width="320" height="240" controls>
-  <source src="papers/app-preview.mov" type="video/mp4/mov">
+  <source src="https://github.com/Defaultin/BeautyDeep/blob/master/papers/app-preview.mov" type="video/mp4/mov">
 </video>
 
 # Repository structure
