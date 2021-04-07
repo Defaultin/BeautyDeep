@@ -32,7 +32,7 @@ from requests.exceptions import ConnectionError
 from app_languages import languages
 from image_processing import Image
 
-
+# comment out before build
 Window.size = (1080 / 3, 2280 / 3.5)
 Window.fullscreen = False
 
