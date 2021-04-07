@@ -292,7 +292,8 @@ class BeautyScreen(Screen):
 
 		result = self.watermarking(im, logo)
 		saving_path = self.app.DCIM + '/BeautyDeep/'
-		os.mkdir(saving_path)
+		if not os.path.exists(saving_path):
+			os.mkdir(saving_path)
 		cv2.imwrite(saving_path + os.path.basename(self.image_path), result)
 		toast(languages[self.app.language]['results_saved'])
 
