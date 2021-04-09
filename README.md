@@ -8,11 +8,11 @@ The program uses a neural network trained to evaluate the beauty percentage on t
 
 # Project Preview
 
-BeautyDeep project consists of an Android application as a client part and a Flask application as a server part.
-
 <img src="https://github.com/Defaultin/BeautyDeep/blob/master/papers/app-preview.gif" width="270" height="480" />
 
 # Project Pipeline
+
+BeautyDeep project consists of an Android application as a client part and a Flask application as a server part.
 
 ![](https://github.com/Defaultin/BeautyDeep/blob/master/papers/pipeline.png "Pipeline")
 
