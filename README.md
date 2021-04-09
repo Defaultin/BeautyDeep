@@ -6,13 +6,17 @@ The program uses a neural network trained to evaluate the beauty percentage on t
 
 ![](https://github.com/Defaultin/BeautyDeep/blob/master/mobile-app/images/logo-bg.png "BeautyDeep")
 
-# Project preview
+# Project Preview
 
 BeautyDeep project consists of an Android application as a client part and a Flask application as a server part.
 
 <img src="https://github.com/Defaultin/BeautyDeep/blob/master/papers/app-preview.gif" width="270" height="480" />
 
-# Repository structure
+# Project Pipeline
+
+![](https://github.com/Defaultin/BeautyDeep/blob/master/papers/pipeline.png "Pipeline")
+
+# Repository Structure
 
 * mobile-app -- source code of an android mobile application
 * neural-network -- source code for training and testing the neural network
@@ -28,7 +32,7 @@ $ pip install -r BeautyDeep/neural-network/requirements.txt
 $ pip install -r BeautyDeep/web-server/requirements.txt
 ```
 
-# How to use
+# Usage
 
 ## For local server
 
