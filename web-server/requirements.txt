@@ -5,4 +5,4 @@ flask-ngrok==0.0.25
 h5py==2.8.0
 Keras==2.2.4
 opencv_python==4.1.1.26
-tensorflow==1.14.0
+tensorflow==2.5.0
